@@ -8,11 +8,11 @@
 
 <h2>Project Screenshots:</h2>
 
-<img src="https://github.com/0STG0T/data_fusion2024_geoanalytics/blob/main/notebooks/images/IMG_0586%20Large.jpeg" alt="project-screenshot" width="500" height="400/">
-
 <img src="./images/Screenshot 2024-03-01 at 16.37.47.png" alt="project-screenshot">
 
 <img src="./images/Screenshot 2024-03-01 at 16.35.57 copy.png" alt="project-screenshot">
+
+<img src="https://github.com/0STG0T/data_fusion2024_geoanalytics/blob/main/notebooks/images/IMG_0586%20Large.jpeg" alt="project-screenshot" width="500" height="400/">
 
 
 <h2>🛠️ Installation Steps:</h2>
