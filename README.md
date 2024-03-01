@@ -8,10 +8,12 @@
 
 <h2>Project Screenshots:</h2>
 
-<img src="https://github.com/0STG0T/data_fusion2024_geoanalytics/blob/main/notebooks/images/IMG_0586%20Large.jpeg" alt="project-screenshot" width="100" height="100/">
+<img src="https://github.com/0STG0T/data_fusion2024_geoanalytics/blob/main/notebooks/images/IMG_0586%20Large.jpeg" alt="project-screenshot" width="300" height="300/">
 
+<img src="./images/Screenshot 2024-03-01 at 16.37.47.png" alt="project-screenshot">
 
-Here're some of the project's best features:
+<img src="./images/Screenshot 2024-03-01 at 16.35.57 copy.png" alt="project-screenshot">
+
 
 <h2>🛠️ Installation Steps:</h2>
 
@@ -38,3 +40,4 @@ Technologies used in the project:
 *   Seaborn
 *   Iterative learning
 *   Probabilistic theory
+*   Docker
