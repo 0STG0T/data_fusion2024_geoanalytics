@@ -117,15 +117,15 @@ def preprocess_data(transactions_df: pd.DataFrame):
     parent_lng_max=pd.NamedAgg('parent_lng', 'max'),
     parent_lng_std=pd.NamedAgg('parent_lng', 'std'),
     
-    #grandparent_lat_mean=pd.NamedAgg('parent_lat', 'mean'),
-    #grandparent_lat_min=pd.NamedAgg('parent_lat', 'min'),
-    #grandparent_lat_max=pd.NamedAgg('parent_lat', 'max'),
-    #grandparent_lat_std=pd.NamedAgg('parent_lat', 'std'),
+    grandparent_lat_mean=pd.NamedAgg('parent_lat', 'mean'),
+    grandparent_lat_min=pd.NamedAgg('parent_lat', 'min'),
+    grandparent_lat_max=pd.NamedAgg('parent_lat', 'max'),
+    grandparent_lat_std=pd.NamedAgg('parent_lat', 'std'),
     
-    #grandparent_lng_mean=pd.NamedAgg('grandparent_lng', 'mean'),
-    #grandparent_lng_min=pd.NamedAgg('grandparent_lng', 'min'),
-    #grandparent_lng_max=pd.NamedAgg('grandparent_lng', 'max'),
-    #grandparent_lng_std=pd.NamedAgg('grandparent_lng', 'std'),
+    grandparent_lng_mean=pd.NamedAgg('grandparent_lng', 'mean'),
+    grandparent_lng_min=pd.NamedAgg('grandparent_lng', 'min'),
+    grandparent_lng_max=pd.NamedAgg('grandparent_lng', 'max'),
+    grandparent_lng_std=pd.NamedAgg('grandparent_lng', 'std'),
     
     mcc_code_mode=pd.NamedAgg('mcc_code', mode),
     datetime_mode=pd.NamedAgg('datetime_id', mode),
@@ -138,24 +138,21 @@ def preprocess_data(transactions_df: pd.DataFrame):
   return test_data
 
 def calculate_probabilities_vectorized(preds_df, hexses_target_lats_lngs, decay_param=0.1):
-    # Extract latitudes and longitudes from predictions and hex targets
-    atm_lats = preds_df['atm_lat'].values[:, np.newaxis]  # Shape (N, 1) where N is number of ATMs
-    atm_lngs = preds_df['atm_lng'].values[:, np.newaxis]  # Shape (N, 1)
+   
+    atm_lats = preds_df['atm_lat'].values[:, np.newaxis]  
+    atm_lngs = preds_df['atm_lng'].values[:, np.newaxis]  
 
-    # Convert list of tuples to a 2D NumPy array
-    hexses_arr = np.array(hexses_target_lats_lngs)  # Shape (M, 2) where M is number of hexes
-    target_lats = hexses_arr[:, 0]  # Shape (M,)
-    target_lngs = hexses_arr[:, 1]  # Shape (M,)
+    hexses_arr = np.array(hexses_target_lats_lngs)  
+    target_lats = hexses_arr[:, 0]  
+    target_lngs = hexses_arr[:, 1]  
 
-    # Compute all distances at once using broadcasting
-    # The resulting array will have shape (N, M)
+
     distances = np.sqrt((atm_lats - target_lats) ** 2 + (atm_lngs - target_lngs) ** 2)
 
-    # Apply decay function to distances to get probabilities
     probas = np.exp(-decay_param * distances)
 
-    # Normalize probabilities so they sum to 1 across each row (for each ATM)
-    probas /= probas.sum(axis=1)[:, np.newaxis]  # Normalize across targets for each ATM
+    
+    probas /= probas.sum(axis=1)[:, np.newaxis]  
 
     return probas
   
@@ -186,7 +183,7 @@ def predict_probs(transactions_df, hexses_target):
     for _ in range(num_chunks):
 
         customer_chunk = customer_df.iloc[customers_chunk_start:customers_chunk_start + chunk_size].copy()
-        customer_chunk['key'] = 1  # Temporary key for merging
+        customer_chunk['key'] = 1  
  
         expanded_chunk = pd.merge(customer_chunk, unique_atms, on='key').drop('key', axis=1)
         
